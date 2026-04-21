@@ -49,7 +49,7 @@ The project uses **Robot Framework** for End-to-End and Regression testing.
 ### Executing Tests
 Run all regression tests using the following command from the project root:
 ```bash
-robot tests/robot/suites/04_regression.robot
+robot tests/robot/suites/*.robot
 ```
 
 ### Viewing Results
