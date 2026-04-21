@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.13.0 on win32)" generated="2026-04-21T14:15:34.252438" rpa="false" schemaversion="5">
+<suite id="s1" name="06 Finnish News" source="C:\Users\mervi\AndroidStudioProjects\MyNewsapp\tests\robot\suites\06_finnish_news.robot">
+<test id="s1-t1" name="Verify Finnish News (YLE) Loading" line="9">
+<kw name="Open News App" owner="app_resources" type="SETUP">
+<kw name="Open Application" owner="AppiumLibrary">
+<arg>http://localhost:4723</arg>
+<arg>automationName=${ANDROID_AUTOMATION_NAME}</arg>
+<arg>platformName=${ANDROID_PLATFORM_NAME}</arg>
+<arg>platformVersion=${ANDROID_PLATFORM_VERSION}</arg>
+<arg>deviceName=${DEVICE_NAME}</arg>
+<arg>appPackage=${APP_PACKAGE}</arg>
+<arg>appActivity=${APP_ACTIVITY}</arg>
+<arg>appWaitActivity=${APP_PACKAGE}${APP_ACTIVITY}</arg>
+<arg>noReset=false</arg>
+<arg>fullReset=false</arg>
+<arg>newCommandTimeout=300</arg>
+<doc>Opens a new application to the given Appium server.
+Capabilities of appium server, Android and iOS,
+Please check https://appium.io/docs/en/2.19/guides/caps/
+| *Option*            | *Man.* | *Description*     |
+| remote_url          | Yes    | Appium server url |
+| alias               | No     | alias             |</doc>
+<status status="PASS" start="2026-04-21T14:15:35.666831" elapsed="10.895502"/>
+</kw>
+<kw name="Ensure App Is In Foreground" owner="app_resources">
+<kw name="Activate Application" owner="AppiumLibrary">
+<arg>${APP_PACKAGE}</arg>
+<doc>Activates the application if it is not running or is running in the background.</doc>
+<status status="PASS" start="2026-04-21T14:15:46.563225" elapsed="2.289297"/>
+</kw>
+<doc>Brings the application to the foreground.</doc>
+<status status="PASS" start="2026-04-21T14:15:46.562754" elapsed="2.289993"/>
+</kw>
+<doc>Launches the application with the predefined capabilities.</doc>
+<status status="PASS" start="2026-04-21T14:15:35.662799" elapsed="13.190042"/>
+</kw>
+<kw name="Start News App Activity" owner="app_resources">
+<kw name="Terminate Application" owner="AppiumLibrary">
+<arg>${APP_PACKAGE}</arg>
+<doc>Terminates the given app on the device.</doc>
+<status status="PASS" start="2026-04-21T14:15:48.854075" elapsed="2.299845"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-21T14:15:51.155083" level="INFO">${extras} = []</msg>
+<var>${extras}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-21T14:15:51.154276" elapsed="0.000898"/>
+</kw>
+<if>
+<branch type="IF" condition="'${query}' != 'None'">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-21T14:15:51.156788" level="INFO">${extra_query} = ['s', 'query', 'yle']</msg>
+<var>${extra_query}</var>
+<arg>s</arg>
+<arg>query</arg>
+<arg>${query}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-21T14:15:51.156023" elapsed="0.000841"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${extras}</arg>
+<arg>${extra_query}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-04-21T14:15:51.157126" elapsed="0.000464"/>
+</kw>
+<status status="PASS" start="2026-04-21T14:15:51.155405" elapsed="0.002280"/>
+</branch>
+<status status="PASS" start="2026-04-21T14:15:51.155326" elapsed="0.002454"/>
+</if>
+<if>
+<branch type="IF" condition="'${use_mock}' == 'true'">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-04-21T14:15:51.158998" level="INFO">${extra_mock} = ['z', 'use_mock', True]</msg>
+<var>${extra_mock}</var>
+<arg>z</arg>
+<arg>use_mock</arg>
+<arg>${True}</arg>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2026-04-21T14:15:51.158307" elapsed="0.000742"/>
+</kw>
+<kw name="Append To List" owner="Collections">
+<arg>${extras}</arg>
+<arg>${extra_mock}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2026-04-21T14:15:51.159231" elapsed="0.000290"/>
+</kw>
+<status status="PASS" start="2026-04-21T14:15:51.157926" elapsed="0.001655"/>
+</branch>
+<status status="PASS" start="2026-04-21T14:15:51.157889" elapsed="0.001746"/>
+</if>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-04-21T14:15:51.161347" level="INFO">&amp;{opts} = { component=com.example.android.mynewsapp/.MainActivity | action=android.intent.action.MAIN }</msg>
+<var>&amp;{opts}</var>
+<arg>component=${APP_PACKAGE}/${APP_ACTIVITY}</arg>
+<arg>action=${action}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-04-21T14:15:51.159867" elapsed="0.001616"/>
+</kw>
+<if>
+<branch type="IF" condition="len($extras) &gt; 0">
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${opts}</arg>
+<arg>extras=${extras}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2026-04-21T14:15:51.162791" elapsed="0.000786"/>
+</kw>
+<status status="PASS" start="2026-04-21T14:15:51.161796" elapsed="0.001933"/>
+</branch>
+<status status="PASS" start="2026-04-21T14:15:51.161738" elapsed="0.002082"/>
+</if>
+<kw name="Execute Script" owner="AppiumLibrary">
+<msg time="2026-04-21T14:15:51.166191" level="INFO">Provided dictionary: {'component': 'com.example.android.mynewsapp/.MainActivity', 'action': 'android.intent.action.MAIN', 'extras': [['s', 'query', 'yle'], ['z', 'use_mock', True]]}</msg>
+<arg>mobile: startActivity</arg>
+<arg>&amp;{opts}</arg>
+<doc>Executes a variety of native, mobile commands that aren't associated
+with a specific endpoint. Check out the appium drivers for more details: https://appium.io/docs/en/2.19/ecosystem/drivers/.</doc>
+<status status="PASS" start="2026-04-21T14:15:51.164028" elapsed="2.220336"/>
+</kw>
+<arg>use_mock=true</arg>
+<arg>query=yle</arg>
+<doc>Starts the news app activity with optional search query and mock data flag using mobile:startActivity.</doc>
+<status status="PASS" start="2026-04-21T14:15:48.853536" elapsed="4.530976"/>
+</kw>
+<kw name="Wait Until Element Is Visible" owner="AppiumLibrary">
+<msg time="2026-04-21T14:15:57.680637" level="INFO">criteria is com.example.android.mynewsapp:id/article_title</msg>
+<arg>id=${APP_PACKAGE}:id/article_title</arg>
+<arg>timeout=${TIMEOUT_LONG}</arg>
+<doc>Waits until the element specified by the ``locator`` is visible.</doc>
+<status status="PASS" start="2026-04-21T14:15:53.384992" elapsed="4.295813"/>
+</kw>
+<kw name="Page Should Contain Text" owner="AppiumLibrary">
+<msg time="2026-04-21T14:16:03.381705" level="INFO">&lt;?xml version='1.0' encoding='UTF-8' standalone='yes' ?&gt;
+&lt;hierarchy index="0" class="hierarchy" rotation="0" width="720" height="1406"&gt;
+  &lt;android.widget.FrameLayout index="0" package="com.example.android.mynewsapp" class="android.widget.FrameLayout" text="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,0][720,1560]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="0" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+    &lt;android.widget.LinearLayout index="0" package="com.example.android.mynewsapp" class="android.widget.LinearLayout" text="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,0][720,1464]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+      &lt;android.widget.FrameLayout index="0" package="com.example.android.mynewsapp" class="android.widget.FrameLayout" text="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,58][720,1464]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="2" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+        &lt;android.view.ViewGroup index="0" package="com.example.android.mynewsapp" class="android.view.ViewGroup" text="" resource-id="com.example.android.mynewsapp:id/decor_content_parent" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,58][720,1464]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+          &lt;android.widget.FrameLayout index="1" package="com.example.android.mynewsapp" class="android.widget.FrameLayout" text="" resource-id="com.example.android.mynewsapp:id/action_bar_container" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,58][720,170]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="3" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+            &lt;android.view.ViewGroup index="0" package="com.example.android.mynewsapp" class="android.view.ViewGroup" text="" resource-id="com.example.android.mynewsapp:id/action_bar" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,58][720,170]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+              &lt;android.widget.TextView index="0" package="com.example.android.mynewsapp" class="android.widget.TextView" text="My News App" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[32,87][279,141]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065" /&gt;
+            &lt;/android.view.ViewGroup&gt;
+          &lt;/android.widget.FrameLayout&gt;
+          &lt;android.widget.FrameLayout index="2" package="com.example.android.mynewsapp" class="android.widget.FrameLayout" text="" resource-id="android:id/content" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,170][720,1464]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="2" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+            &lt;android.view.ViewGroup index="0" package="com.example.android.mynewsapp" class="android.view.ViewGroup" text="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,170][720,1464]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+              &lt;androidx.recyclerview.widget.RecyclerView index="0" package="com.example.android.mynewsapp" class="androidx.recyclerview.widget.RecyclerView" text="" resource-id="com.example.android.mynewsapp:id/list" checkable="false" checked="false" clickable="false" enabled="true" focusable="true" focused="false" long-clickable="false" password="false" scrollable="true" selected="false" bounds="[0,170][720,1464]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+                &lt;android.widget.LinearLayout index="0" package="com.example.android.mynewsapp" class="android.widget.LinearLayout" text="" checkable="false" checked="false" clickable="true" enabled="true" focusable="true" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,170][720,1464]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+                  &lt;android.widget.LinearLayout index="0" package="com.example.android.mynewsapp" class="android.widget.LinearLayout" text="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[16,186][256,219]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+                    &lt;android.widget.TextView index="0" package="com.example.android.mynewsapp" class="android.widget.TextView" text="SCIENCE" resource-id="com.example.android.mynewsapp:id/section" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[86,186][185,219]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065" /&gt;
+                  &lt;/android.widget.LinearLayout&gt;
+                  &lt;android.widget.LinearLayout index="1" package="com.example.android.mynewsapp" class="android.widget.LinearLayout" text="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[288,186][546,348]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="2" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+                    &lt;android.widget.TextView index="0" package="com.example.android.mynewsapp" class="android.widget.TextView" text="Future of Space Exploration" resource-id="com.example.android.mynewsapp:id/article_title" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[288,186][546,267]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065" /&gt;
+                    &lt;android.widget.TextView index="1" package="com.example.android.mynewsapp" class="android.widget.TextView" text="Exploring the final frontier in 2026." resource-id="com.example.android.mynewsapp:id/trail_text" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[288,267][546,348]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="2" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065" /&gt;
+                  &lt;/android.widget.LinearLayout&gt;
+                  &lt;android.widget.LinearLayout index="2" package="com.example.android.mynewsapp" class="android.widget.LinearLayout" text="" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[578,186][704,252]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="3" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065"&gt;
+                    &lt;android.widget.TextView index="0" package="com.example.android.mynewsapp" class="android.widget.TextView" text="20.04.26" resource-id="com.example.android.mynewsapp:id/date" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[606,186][704,219]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="1" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065" /&gt;
+                    &lt;android.widget.TextView index="1" package="com.example.android.mynewsapp" class="android.widget.TextView" text="Test Author" resource-id="com.example.android.mynewsapp:id/author" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[578,219][704,252]" displayed="true" a11y-important="true" screen-reader-focusable="false" drawing-order="2" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065" /&gt;
+                  &lt;/android.widget.LinearLayout&gt;
+                &lt;/android.widget.LinearLayout&gt;
+              &lt;/androidx.recyclerview.widget.RecyclerView&gt;
+            &lt;/android.view.ViewGroup&gt;
+          &lt;/android.widget.FrameLayout&gt;
+        &lt;/android.view.ViewGroup&gt;
+      &lt;/android.widget.FrameLayout&gt;
+    &lt;/android.widget.LinearLayout&gt;
+    &lt;android.view.View index="1" package="com.example.android.mynewsapp" class="android.view.View" text="" resource-id="android:id/statusBarBackground" checkable="false" checked="false" clickable="false" enabled="true" focusable="false" focused="false" long-clickable="false" password="false" scrollable="false" selected="false" bounds="[0,0][720,58]" displayed="true" a11y-important="false" screen-reader-focusable="false" drawing-order="3" showing-hint="false" text-entry-key="false" dismissable="false" a11y-focused="false" heading="false" live-region="0" context-clickable="false" content-invalid="false" window-id="4065" /&gt;
+  &lt;/android.widget.FrameLayout&gt;
+&lt;/hierarchy&gt;</msg>
+<kw name="Capture Page Screenshot" owner="AppiumLibrary">
+<msg time="2026-04-21T14:16:05.421455" level="FAIL">WebDriverException: Message: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\mervi\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\build\lib\jsonwp-proxy\proxy.js:310:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async AndroidUiautomator2Driver.getScreenshot (C:\Users\mervi\.appium\node_modules\appium-uiautomator2-driver\build\lib\commands\screenshot.js:72:19)</msg>
+<doc>Takes a screenshot of the current page and embeds it into the log.</doc>
+<status status="FAIL" start="2026-04-21T14:16:03.383306" elapsed="2.045661">WebDriverException: Message: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\mervi\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\build\lib\jsonwp-proxy\proxy.js:310:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async AndroidUiautomator2Driver.getScreenshot (C:\Users\mervi\.appium\node_modules\appium-uiautomator2-driver\build\lib\commands\screenshot.js:72:19)</status>
+</kw>
+<msg time="2026-04-21T14:16:05.432351" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: WebDriverException: Message: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\mervi\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\build\lib\jsonwp-proxy\proxy.js:310:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async AndroidUiautomator2Driver.getScreenshot (C:\Users\mervi\.appium\node_modules\appium-uiautomator2-driver\build\lib\commands\screenshot.js:72:19)</msg>
+<msg time="2026-04-21T14:16:05.440102" level="FAIL">Page should have contained text 'Suomi voitti jääkiekon maailmanmestaruuden' but did not</msg>
+<arg>Suomi voitti jääkiekon maailmanmestaruuden</arg>
+<doc>Verifies that the current page contains ``text``.</doc>
+<status status="FAIL" start="2026-04-21T14:15:57.681419" elapsed="7.765286">Page should have contained text 'Suomi voitti jääkiekon maailmanmestaruuden' but did not</status>
+</kw>
+<kw name="Page Should Contain Text" owner="AppiumLibrary">
+<arg>Yle Urheilu</arg>
+<doc>Verifies that the current page contains ``text``.</doc>
+<status status="NOT RUN" start="2026-04-21T14:16:05.452800" elapsed="0.000107"/>
+</kw>
+<kw name="Page Should Contain Text" owner="AppiumLibrary">
+<arg>Kesäkuu alkaa helteisessä säässä</arg>
+<doc>Verifies that the current page contains ``text``.</doc>
+<status status="NOT RUN" start="2026-04-21T14:16:05.456362" elapsed="0.000061"/>
+</kw>
+<kw name="Close News App" owner="app_resources" type="TEARDOWN">
+<kw name="Close Application" owner="AppiumLibrary">
+<doc>Closes the current application and the webdriver session.</doc>
+<status status="PASS" start="2026-04-21T14:16:05.460795" elapsed="3.086287"/>
+</kw>
+<doc>Closes the application.</doc>
+<status status="PASS" start="2026-04-21T14:16:05.459084" elapsed="3.088294"/>
+</kw>
+<doc>Verify that Finnish news from YLE can be loaded and displayed.</doc>
+<tag>finnish_news</tag>
+<status status="FAIL" start="2026-04-21T14:15:35.659285" elapsed="32.888493">Page should have contained text 'Suomi voitti jääkiekon maailmanmestaruuden' but did not</status>
+</test>
+<doc>Finnish News Integration tests for MyNewsapp.</doc>
+<status status="FAIL" start="2026-04-21T14:15:34.258708" elapsed="34.297267"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">finnish_news</stat>
+</tag>
+<suite>
+<stat name="06 Finnish News" id="s1" pass="0" fail="1" skip="0">06 Finnish News</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2026-04-21T14:16:05.432351" level="WARN">Keyword 'Capture Page Screenshot' could not be run on failure: WebDriverException: Message: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+Stacktrace:
+UnknownError: 'GET /screenshot' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+    at UIA2Proxy.command (C:\Users\mervi\AppData\Roaming\npm\node_modules\appium\node_modules\@appium\base-driver\build\lib\jsonwp-proxy\proxy.js:310:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async AndroidUiautomator2Driver.getScreenshot (C:\Users\mervi\.appium\node_modules\appium-uiautomator2-driver\build\lib\commands\screenshot.js:72:19)</msg>
+</errors>
+</robot>
