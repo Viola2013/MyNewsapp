@@ -1,0 +1,24 @@
+{
+  "articles": [
+    {
+      "title": "Suomi voitti jääkiekon maailmanmestaruuden",
+      "url": "https://yle.fi/a/74-20000001",
+      "publishedAt": "2024-05-20T21:00:00Z",
+      "author": "Yle Urheilu",
+      "description": "Leijonat juhlivat jälleen mestaruutta tiukan finaalin jälkeen.",
+      "source": {
+        "name": "Yle Uutiset"
+      }
+    },
+    {
+      "title": "Kesäkuu alkaa helteisessä säässä",
+      "url": "https://yle.fi/a/74-20000002",
+      "publishedAt": "2024-05-31T06:00:00Z",
+      "author": "Yle Sää",
+      "description": "Ennusteiden mukaan lämpötilat nousevat jopa 30 asteeseen.",
+      "source": {
+        "name": "Yle Uutiset"
+      }
+    }
+  ]
+}

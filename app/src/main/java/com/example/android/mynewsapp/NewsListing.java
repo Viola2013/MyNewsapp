@@ -4,7 +4,7 @@ package com.example.android.mynewsapp;
 /*
   Created by Mervi on 1.7.2017.
  */
-class NewsListing {
+public class NewsListing {
 
     private final String mTitle;
     private final String mWebUrl;

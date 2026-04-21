@@ -18,10 +18,6 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="progress_bar" parent="wrap_content">
-        <item name="android:visibility">gone</item>
-    </style>
-
     <style name="item_container" parent="fit_parent">
         <item name="android:orientation">horizontal</item>
         <item name="android:padding">@dimen/padding</item>
@@ -32,12 +28,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
         <item name="android:gravity">center</item>
-    </style>
-
-    <style name="item_thumbnail" parent="wrap_content">
-        <item name="android:padding">@dimen/padding_small</item>
-        <item name="android:adjustViewBounds">true</item>
-        <item name="android:scaleType">centerInside</item>
     </style>
 
     <style name="text_style" parent="wrap_content">

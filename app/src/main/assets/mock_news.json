@@ -1,0 +1,47 @@
+{
+  "response": {
+    "status": "ok",
+    "total": 3,
+    "results": [
+      {
+        "id": "science/2026/apr/20/space-exploration",
+        "type": "article",
+        "sectionId": "science",
+        "sectionName": "Science",
+        "webPublicationDate": "2026-04-20T12:00:00Z",
+        "webTitle": "Future of Space Exploration",
+        "webUrl": "https://www.theguardian.com/science/2026/apr/20/space-exploration",
+        "fields": {
+          "byline": "Test Author",
+          "trailText": "Exploring the final frontier in 2026."
+        }
+      },
+      {
+        "id": "technology/2026/apr/20/ai-advancements",
+        "type": "article",
+        "sectionId": "technology",
+        "sectionName": "Technology",
+        "webPublicationDate": "2026-04-20T13:00:00Z",
+        "webTitle": "AI Advancements in 2026",
+        "webUrl": "https://www.theguardian.com/technology/2026/apr/20/ai-advancements",
+        "fields": {
+          "byline": "AI Reporter",
+          "trailText": "How AI is changing the world."
+        }
+      },
+      {
+        "id": "science/2026/apr/20/new-planet-discovered",
+        "type": "article",
+        "sectionId": "science",
+        "sectionName": "Science",
+        "webPublicationDate": "2026-04-20T14:00:00Z",
+        "webTitle": "New Planet Discovered in Nearby System",
+        "webUrl": "https://www.theguardian.com/science/2026/apr/20/new-planet-discovered",
+        "fields": {
+          "byline": "Astronomer",
+          "trailText": "A new habitable planet has been found."
+        }
+      }
+    ]
+  }
+}

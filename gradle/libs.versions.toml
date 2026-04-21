@@ -1,0 +1,28 @@
+[versions]
+agp = "9.1.1"
+appcompat = "1.7.1"
+constraintlayout = "2.2.1"
+espressoCore = "3.7.0"
+androidxTestExtJunit = "1.2.1"
+androidxTestRunner = "1.6.2"
+junit = "4.13.2"
+loader = "1.1.0"
+recyclerview = "1.4.0"
+desugar_jdk_libs = "2.1.5"
+cameraCamera2Pipe = "1.6.0"
+
+
+
+[libraries]
+gradle = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExtJunit" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidxTestRunner" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+loader = { module = "androidx.loader:loader", version.ref = "loader" }
+recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
+desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+camera-camera2-pipe = { group = "androidx.camera", name = "camera-camera2-pipe", version.ref = "cameraCamera2Pipe" }
+

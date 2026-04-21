@@ -1,92 +1,106 @@
 package com.example.android.mynewsapp;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
+import androidx.recyclerview.widget.ListAdapter;
+import androidx.recyclerview.widget.RecyclerView;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
- * Created by Mervi on 1.7.2017.
+ * Adapter for a RecyclerView to display news articles.
+ * Uses ListAdapter for efficient updates via DiffUtil.
  */
+public class NewsAdapter extends ListAdapter<NewsListing, NewsAdapter.ViewHolder> {
 
-public class NewsAdapter extends ArrayAdapter<NewsListing> {
-    private static final String LOG_TAG = NewsAdapter.class.getSimpleName();
+    public interface OnItemClickListener {
+        void onItemClick(NewsListing item);
+    }
 
-    NewsAdapter(Context context, ArrayList<NewsListing> articles) {
-        super(context, 0, articles);
+    private final OnItemClickListener mListener;
+
+    // Modern Date API (Requires desugaring in build.gradle)
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+    public static final DateTimeFormatter OUTPUT_FORMATTER;
+
+    static {
+        OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yy", Locale.getDefault());
+    }
+
+    public NewsAdapter(OnItemClickListener listener) {
+        super(new NewsDiffCallback());
+        mListener = listener;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ViewHolder holder;
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.news_list_item, parent, false);
+        return new ViewHolder(view);
+    }
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.news_list_item, parent, false);
-            holder = new ViewHolder();
-            holder.title = convertView.findViewById(R.id.article_title);
-            holder.sectionName = convertView.findViewById(R.id.section);
-            holder.date = convertView.findViewById(R.id.date);
-            holder.author = convertView.findViewById(R.id.author);
-            holder.trailText = convertView.findViewById(R.id.trail_text);
-            convertView.setTag(holder);
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        NewsListing item = getItem(position);
+
+        holder.itemView.setOnClickListener(v -> {
+            if (mListener != null) {
+                mListener.onItemClick(item);
+            }
+        });
+
+        // Always set text or visibility to avoid recycling bugs (showing old data in new rows)
+        holder.title.setText(item.getTitle());
+        holder.sectionName.setText(item.getSectionName());
+        holder.author.setText(item.getAuthor());
+        holder.trailText.setText(item.getTrailText());
+
+        // Improved Date Parsing
+        String dateString = item.getDate();
+        if (dateString != null && !dateString.isEmpty()) {
+            try {
+                // ZonedDateTime requires compileOptions { coreLibraryDesugaringEnabled true }
+                ZonedDateTime parsedDate = ZonedDateTime.parse(dateString, INPUT_FORMATTER);
+                holder.date.setText(parsedDate.format(OUTPUT_FORMATTER));
+            } catch (Exception e) {
+                holder.date.setText(dateString); // Fallback to raw string
+            }
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder.date.setText("");
         }
-
-        NewsListing currNewslist = getItem(position);
-
-        if (!currNewslist.getTitle().isEmpty())
-            holder.title.setText(currNewslist.getTitle());
-        if (!currNewslist.getSectionName().isEmpty())
-            holder.sectionName.setText(currNewslist.getSectionName());
-        if (!currNewslist.getDate().isEmpty()) {
-            Date parsedDate = parseDate(currNewslist.getDate());
-            if (parsedDate != null) holder.date.setText(formatDate(parsedDate));
-        }
-        if (!currNewslist.getAuthor().isEmpty())
-            holder.author.setText(currNewslist.getAuthor());
-        if (!currNewslist.getTrailText().isEmpty())
-            holder.trailText.setText(currNewslist.getTrailText());
-
-
-        return convertView;
     }
 
-    private String formatDate(Date dateObj) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
-        return dateFormat.format(dateObj);
-    }
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        final TextView title, sectionName, date, trailText, author;
 
-    private Date parseDate(String strDate) {
-
-        if (strDate == null) return null;
-        SimpleDateFormat parser = new SimpleDateFormat("dd-MM-yyyy'T'HH:mm:ss'Z'");
-        Date date = null;
-        try {
-            date = parser.parse(strDate);
-        } catch (ParseException e) {
-            Log.e(LOG_TAG, "Error parsing date", e);
+        ViewHolder(View view) {
+            super(view);
+            title = view.findViewById(R.id.article_title);
+            sectionName = view.findViewById(R.id.section);
+            date = view.findViewById(R.id.date);
+            author = view.findViewById(R.id.author);
+            trailText = view.findViewById(R.id.trail_text);
         }
-        return date;
     }
 
-    private static class ViewHolder {
-        TextView title;
-        TextView sectionName;
-        TextView date;
-        TextView trailText;
-        TextView author;
+    static class NewsDiffCallback extends DiffUtil.ItemCallback<NewsListing> {
+        @Override
+        public boolean areItemsTheSame(@NonNull NewsListing oldItem, @NonNull NewsListing newItem) {
+            // Using Web URL as a unique ID
+            return oldItem.getWebUrl().equals(newItem.getWebUrl());
+        }
 
+        @Override
+        public boolean areContentsTheSame(@NonNull NewsListing oldItem, @NonNull NewsListing newItem) {
+            // Check if visible content has changed
+            return oldItem.getTitle().equals(newItem.getTitle()) &&
+                    oldItem.getDate().equals(newItem.getDate());
+        }
     }
 }

@@ -2,4 +2,5 @@
     <string name="app_name">My News App</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="no_results">No results</string>
-   </resources>
+    <string name="error_loading">Error loading news</string>
+</resources>
