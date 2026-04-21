@@ -38,7 +38,7 @@ The project uses **Robot Framework** for End-to-End and Regression testing.
     ```bash
     appium
     ```
-3.  **Android Environment:** 
+3.  **Android Environment:**
     - An Android Emulator or physical device must be connected via `adb`.
     - The `ANDROID_HOME` environment variable must be set.
 4.  **Build the App:** Ensure the latest debug APK is built:
