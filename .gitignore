@@ -7,3 +7,13 @@
 /build
 /captures
 .externalNativeBuild
+
+# Robot Framework logs and reports
+log.html
+report.html
+output.xml
+/tests/robot/reports/
+/tests/robot/results/
+
+# Error logs
+*.log
